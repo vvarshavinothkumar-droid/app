@@ -1,0 +1,73 @@
+students = {}
+
+def add_student():
+    roll_no = input("Enter Roll Number: ")
+    name = input("Enter Student Name: ")
+
+    if roll_no in students:
+        print("Student already exists.")
+    else:
+        students[roll_no] = {
+            "name": name,
+            "present": 0,
+            "total_classes": 0
+        }
+        print("Student added successfully.")
+
+def mark_attendance():
+    if not students:
+        print("No students available.")
+        return
+
+    print("\nMark Attendance (P = Present, A = Absent)")
+    for roll_no, details in students.items():
+        status = input(f"{roll_no} - {details['name']}: ").upper()
+
+        if status in ["P", "A"]:
+            details["total_classes"] += 1
+            if status == "P":
+                details["present"] += 1
+        else:
+            print("Invalid input. Attendance not recorded.")
+
+    print("Attendance marked successfully.")
+
+def view_attendance():
+    if not students:
+        print("No records found.")
+        return
+
+    print("\nAttendance Report")
+    print("-" * 60)
+    print(f"{'Roll No':<10}{'Name':<20}{'Present':<10}{'Total':<10}{'Percentage'}")
+
+    for roll_no, details in students.items():
+        total = details["total_classes"]
+        present = details["present"]
+
+        percentage = (present / total * 100) if total > 0 else 0
+
+        print(f"{roll_no:<10}{details['name']:<20}{present:<10}{total:<10}{percentage:.2f}%")
+
+def main():
+    while True:
+        print("\n===== Student Attendance Management =====")
+        print("1. Add Student")
+        print("2. Mark Attendance")
+        print("3. View Attendance Report")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            add_student()
+        elif choice == "2":
+            mark_attendance()
+        elif choice == "3":
+            view_attendance()
+        elif choice == "4":
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice. Try again.")
+main()
