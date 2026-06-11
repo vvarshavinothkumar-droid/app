@@ -1,1 +1,1 @@
-# app
+"The Student Attendance Management System is designed to maintain and track student attendance records.It helps teachers manage attendance efficiently and provides accurate repots for monitoring student participation and perfomance
